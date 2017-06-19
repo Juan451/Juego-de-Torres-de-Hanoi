@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<title>Las torres de Hanoi</title>
+		<meta charset="utf-8">
+		<style type="text/css">
+			*{
+				margin: 0 auto;
+			}
+			.caja {
+				width: 250px;
+				height: 250px;
+				border: 1px solid #000;
+				float: left;
+				text-align: center;
+			}
+			.relleno {
+				width: 240px;
+				height: 169px;
+				
+			}
+			.ficha {
+				width: 249px;
+				height: 20px;
+				text-align: center;
+			}
+			#rojo {
+				
+				background-color: red;
+				height: 20px;
+			}
+			#verde {
+				
+				background-color: green;
+				height: 20px;
+			}
+			#amarillo {
+				
+				background-color: yellow;
+				height: 20px;
+			}
+			#orange {
+				
+				background-color: orange;
+				height: 20px;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload=function() {
+				var ficha = null;
+				var rojo = document.getElementById("rojo");
+				var verde = document.getElementById("verde");
+				var amarillo = document.getElementById("amarillo");
+				var orange = document.getElementById("orange");
+				var id1 = document.getElementById("caja1");
+				var id2 = document.getElementById("caja2");
+				var id3 = document.getElementById("caja3");
+		function mover(caja) {
+
+					var fila = caja.getElementsByClassName("ficha");
+					if(ficha == null) {
+						for(var i = 0;i<fila.length;i++) {
+							c = fila[i].childElementCount;
+							if(c != 0) {
+								f = fila[i].firstElementChild;								
+								ficha = f;								
+								break;
+							}
+						}
+					} else {
+						for(var i = fila.length-1;i>=0;i--) {
+							c = fila[i].childElementCount;
+							if(c == 0) {
+								if(i!=3) {
+									anterior = fila[i+1].firstElementChild.style.zIndex;
+									movido = ficha.style.zIndex; 
+										if(movido < anterior) {
+											fila[i].appendChild(ficha);
+											ficha = null;								
+											break;
+										} else ficha = null;
+								} else {
+									fila[i].appendChild(ficha);
+									ficha = null;								
+									break;
+								}
+							}
+						}
+					}
+				}
+
+				id1.addEventListener("click",function() {mover(id1)});
+				id2.addEventListener("click",function() { mover(id2)});
+				id3.addEventListener("click",function() { mover(id3)});
+
+			}
+		</script>
+	</head>
+	<body>
+		<div id="caja1" class="caja">
+			<div id="1" class="relleno"></div>
+			<div class="ficha">
+				<div id="rojo" style="width: 80px; z-index: 1;"></div>				
+			</div>
+			<div class="ficha">
+				<div id="verde" style="width: 120px; z-index: 2;"></div>
+			</div>
+			<div class="ficha">
+				<div id="amarillo" style="width: 160px; z-index: 3;"></div>
+			</div>
+			<div class="ficha">
+				<div id="orange" style="width: 200px; z-index: 4;"></div>
+			</div>
+		</div>
+		<div id="caja2" class="caja">
+			<div id="2" class="relleno"></div>
+			<div class="ficha"></div>
+			<div class="ficha"></div>
+			<div class="ficha"></div>
+			<div class="ficha"></div>
+		</div>
+		<div id="caja3" class="caja">
+			<div id="3" class="relleno"></div>
+			<div class="ficha"></div>
+			<div class="ficha"></div>
+			<div class="ficha"></div>
+			<div class="ficha"></div>
+		</div>
+	</body>
+</html>
